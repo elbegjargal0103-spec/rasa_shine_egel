@@ -1,0 +1,33 @@
+version: "3.1"
+
+intents:
+  - greet
+  - ask_error_calc
+  - give_measurements
+  - give_instrument_error
+
+slots:
+  measurements_text:
+    type: text
+    influence_conversation: false
+  instrument_error:
+    type: float
+    influence_conversation: false
+
+responses:
+  utter_greet:
+    - text: "Сайн байна уу! Би хэмжилтийн (туршилтын) алдаа боловсруулж бодож өгнө 😊"
+
+  utter_how_to_give:
+    - text: "Хэмжилтийн утгуудаа дарааллаар нь бичээд явуулна уу. Жишээ: 10.1 10.2 10.0 10.3\nХэрвээ багажийн алдаа байгаа бол бас бичиж болно: 'багажийн алдаа 0.01'"
+
+  utter_ask_instrument_error:
+    - text: "Багажийн абсолют алдаа (Δ_instr) хэд вэ? Мэдэхгүй бол 'алгасъя' гэж бичиж болно."
+
+  utter_skip_ok:
+    - text: "За ойлголоо. Зөвхөн статистик аргаар алдааг бодоод өгье."
+
+actions:
+  - action_store_measurements
+  - action_store_instrument_error
+  - action_calc_measurement_error
