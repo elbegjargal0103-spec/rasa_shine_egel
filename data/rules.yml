@@ -1,13 +1,31 @@
 version: "3.1"
 
 rules:
-
-- rule: Say goodbye anytime the user says goodbye
+- rule: greet
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+    - intent: greet
+    - action: utter_greet
+    - action: utter_how_to_give
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: user asks for error calc
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+    - intent: ask_error_calc
+    - action: utter_how_to_give
+
+- rule: store measurements then ask instrument error
+  steps:
+    - intent: give_measurements
+    - action: action_store_measurements
+    - action: utter_ask_instrument_error
+
+- rule: store instrument error then calculate
+  steps:
+    - intent: give_instrument_error
+    - action: action_store_instrument_error
+    - action: action_calc_measurement_error
+
+- rule: restart calculation
+  steps:
+    - intent: restart_calc
+    - action: action_reset_calc
+    - action: utter_how_to_give

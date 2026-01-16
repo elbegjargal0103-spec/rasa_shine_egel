@@ -7,7 +7,6 @@ intents:
   - give_instrument_error
   - skip_instrument_error
 
-
 slots:
   measurements_text:
     type: text
@@ -34,7 +33,11 @@ responses:
   utter_skip_ok:
     - text: "За ойлголоо. Зөвхөн статистик аргаар алдааг бодоод өгье."
 
+  utter_restart_calc:
+    - text: "Дахиж шинээр алдаа тооцох уу?"
+
 actions:
   - action_store_measurements
   - action_store_instrument_error
   - action_calc_measurement_error
+  - action_reset_calc
