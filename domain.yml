@@ -6,6 +6,11 @@ intents:
   - give_measurements
   - give_instrument_error
   - skip_instrument_error
+  - restart_calc 
+  - show_history
+  - show_run_detail
+
+
 
 slots:
   measurements_text:
@@ -36,8 +41,15 @@ responses:
   utter_restart_calc:
     - text: "Дахиж шинээр алдаа тооцох уу?"
 
+  utter_history_empty:
+    - text: "Одоогоор хадгалсан тооцоо алга байна. Эхлээд хэмжилтээ явуулаад бодоорой 😊"
+
+
 actions:
   - action_store_measurements
   - action_store_instrument_error
   - action_calc_measurement_error
   - action_reset_calc
+  - action_show_history
+  - action_show_run_detail
+

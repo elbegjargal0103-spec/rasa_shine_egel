@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lab Error Bot (REST)</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      #log { border: 1px solid #ccc; padding: 10px; height: 320px; overflow: auto; }
+      .me { margin: 6px 0; }
+      .bot { margin: 6px 0; }
+      input { width: 80%; padding: 8px; }
+      button { padding: 8px 12px; }
+    </style>
+  </head>
+  <body>
+    <h2>Lab Error Bot (REST)</h2>
+    <div id="log"></div>
+    <br />
+    <input id="msg" placeholder="Энд бич..." />
+    <button onclick="send()">Send</button>
+
+    <script>
+      const sender = "user_" + Math.random().toString(16).slice(2);
+
+      function add(cls, text) {
+        const div = document.createElement("div");
+        div.className = cls;
+        div.textContent = text;
+        document.getElementById("log").appendChild(div);
+        document.getElementById("log").scrollTop = 999999;
+      }
+
+      async function send() {
+        const input = document.getElementById("msg");
+        const text = input.value.trim();
+        if (!text) return;
+        add("me", "You: " + text);
+        input.value = "";
+
+        const res = await fetch("http://localhost:5005/webhooks/rest/webhook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sender, message: text })
+        });
+        const data = await res.json();
+        if (!data.length) add("bot", "Bot: (хоосон хариу)");
+        for (const m of data) {
+          if (m.text) add("bot", "Bot: " + m.text);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -44,3 +44,31 @@ nlu:
     - шинээр эхэлье
     - reset
     - restart
+
+- intent: show_history
+  examples: |
+    - түүх
+    - өмнөх тооцоо
+    - өмнөх үр дүн
+    - хадгалсан тооцоонууд
+    - сүүлийн тооцоонууд
+    - history
+    - last results
+
+- intent: show_run_detail
+  examples: |
+    - дэлгэрэнгүй
+    - дэлгэрэнгүй 1
+    - дэлгэрэнгүй 10
+    - дэлгэрэнгүй 999
+    - дэлгэрэнгүй #7
+    - #7 дэлгэрэнгүй
+    - detail 12
+    - run 12
+
+- regex: run_id
+  examples: |
+    - \d+
+
+
+
